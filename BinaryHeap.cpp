@@ -1,38 +1,70 @@
 #include <iostream>
+#include <list>
 using namespace std;
 
 template<typename T>
 struct nodo
 {
   T valor;
-  nodo<T>* izq;
-  nodo<T>* der;
+  int parent;
+  int izq;
+  int der;
 };
 
 template<typename T>
 class BinHeap
 {
   public:
+    BinHeap()
+    {
+      h = new list<T>;
+      current_size = 0;
+    }
+
     void Insert(T valor)
     {
-      if(isEmpty())
+      if(current_size == 0)
       {
-        root = new nodo<T>;
-        root->valor = valor;
-        return;
+       this->h[0] = valor;
+       ++current_size;
+       return;
       }
-      else if(valor < root->valor)
+      else
       {
-        auto next = LastNodo();
-        next->valor = valor;
+        this->h.push_back(valor);
+        ++current_size;
+        if(h.)
       }
-
-       
+      
     }
     
-    T Take(nodo<T>* taken)
+    int leftCh(int index)
     {
+      if(h[2*index + 1] != NULL)
+      {
+        return (2*index + 1);
+      }
+      else
+      {
+        return int();
+      }
+    }
 
+    int rightCh(int index)
+    {
+      if(h[2*index + 2] != NULL)
+      {
+        return (2*index + 2);
+      }
+      else
+      {
+        return int();
+      }
+    }
+
+    int parent(int index)
+    {
+      return (index - 1)/2 ;
     }
 
     void Find(T buscado)
@@ -40,37 +72,43 @@ class BinHeap
 
     }
 
-    bool isEmpty()
+    void Print()
     {
-      return !root;
+
     }
 
-    nodo<T>* LastNodo()
+
+    int size()
     {
-      return nextNodo(root);
+      return current_size;
     }
+
+    int LastNodo()
+    {
+
+    }
+
   private:
+    void recPrint(nodo<T>* actual)
+    {
+      
+    }
+    
     nodo<T>* nextNodo(nodo<T>* actual)
     {
-      if(!actual->izq)
-      {
-        return actual;
-      }
-      actual = nextNodo(actual->izq);
-      actual = nextNodo(actual->der);
-
-      return actual;
+  
     }
 
-    nodo<T>* root = nullptr;
+    T *h;
+    int current_size;
 
 };
 
 int main()
 {
 
-  BinHeap<int> heap;
-  heap.Insert(10);
-
+  //BinHeap<int> heap(100);
+  
+  //heap.Print();
 }
 
