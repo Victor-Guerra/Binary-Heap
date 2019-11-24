@@ -1,5 +1,5 @@
 #include <iostream>
-#include <list>
+#include <vector>
 using namespace std;
 
 template<typename T>
@@ -17,7 +17,7 @@ class BinHeap
   public:
     BinHeap()
     {
-      h = new list<T>;
+      //h = new list<T>;
       current_size = 0;
     }
 
@@ -25,15 +25,18 @@ class BinHeap
     {
       if(current_size == 0)
       {
-       this->h[0] = valor;
+       h.push_back(valor);
        ++current_size;
        return;
       }
       else
       {
-        this->h.push_back(valor);
+        h.push_back(valor);
         ++current_size;
-        if(h.)
+        if(h[current_size - 1] > h[parent(current_size - 1)])
+        {
+          recSwap(current_size -1);
+        }
       }
       
     }
@@ -67,14 +70,21 @@ class BinHeap
       return (index - 1)/2 ;
     }
 
-    void Find(T buscado)
+    int FindIndex(T buscado)
     {
-
+      for(int i = 0; i < current_size; ++i)
+      {
+        if(h[i] == buscado)
+          return i;
+      }
     }
 
     void Print()
     {
-
+      for(int i = 0; i < current_size; ++i)
+      {
+        cout << h.at(i) << endl;
+      }
     }
 
 
@@ -83,10 +93,6 @@ class BinHeap
       return current_size;
     }
 
-    int LastNodo()
-    {
-
-    }
 
   private:
     void recPrint(nodo<T>* actual)
@@ -94,12 +100,26 @@ class BinHeap
       
     }
     
-    nodo<T>* nextNodo(nodo<T>* actual)
+    void parentSwap(int indexValueToSwap)
     {
-  
+      swap(h[indexValueToSwap],h[parent(indexValueToSwap)]); 
     }
 
-    T *h;
+    void recSwap(int indexValueToSwap)
+    {
+      if(h[indexValueToSwap] > h[parent(indexValueToSwap)])
+      {
+        parentSwap(indexValueToSwap);
+        recSwap(indexValueToSwap);
+        return;
+      }
+      else
+      {
+        return;
+      }
+    }
+
+  vector<T> h;
     int current_size;
 
 };
@@ -107,6 +127,17 @@ class BinHeap
 int main()
 {
 
+  BinHeap<int> heap;
+  heap.Insert(10);
+  heap.Insert(9);
+  heap.Insert(8);
+  heap.Print();
+  // 10 -> 9
+  // \> 8
+  heap.Insert(11);
+  heap.Print();
+  // 11 -> 10
+  // \> 9 -> 8
   //BinHeap<int> heap(100);
   
   //heap.Print();
