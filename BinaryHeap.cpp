@@ -95,10 +95,6 @@ class BinHeap
 
 
   private:
-    void recPrint(nodo<T>* actual)
-    {
-      
-    }
     
     void parentSwap(int indexValueToSwap)
     {
@@ -120,7 +116,7 @@ class BinHeap
     }
 
   vector<T> h;
-    int current_size;
+  int current_size;
 
 };
 
@@ -129,12 +125,15 @@ int main()
 
   BinHeap<int> heap;
   heap.Insert(10);
+  heap.Print();
   heap.Insert(9);
+  heap.Print();
   heap.Insert(8);
   heap.Print();
   // 10 -> 9
   // \> 8
   heap.Insert(11);
+  heap.Insert(12);
   heap.Print();
   // 11 -> 10
   // \> 9 -> 8
